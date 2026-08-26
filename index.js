@@ -9,7 +9,7 @@ import { viewEndereco } from './src/repository/entitys/endereco.js'
 const app = express()
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+    res.send('Hello World')
 })
 
 app.get('/cliente', async (req, res) => {
@@ -67,5 +67,5 @@ app.get('/pedidos_produtos', async (req, res) => {
 })
 
 app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000')
+    console.log('Server is running on http://localhost:3000')
 })
