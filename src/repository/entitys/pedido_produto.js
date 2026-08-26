@@ -8,7 +8,12 @@ export async function viewPedidoProduto() {
     SELECT 
       Pedido.numero AS numero_pedido, 
       Pedido.id_cliente, 
-      Produto.nome AS nome_produto
+      Produto.nome AS nome_produto,
+      Produto.codigo AS codigo_produto,
+      Produto.descricao AS produto_descricao,
+      Produto.preco AS produto_preco,
+      Pedido.data_elaboracao AS data_pedido,
+      Pedido_Produto.id_pedido, Pedido_Produto.id_produto
     FROM Pedido
     INNER JOIN Pedido_Produto ON Pedido.numero = Pedido_Produto.id_pedido
     INNER JOIN Produto ON Pedido_Produto.id_produto = Produto.codigo
