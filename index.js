@@ -5,8 +5,10 @@ import { viewPedidos } from './src/repository/entitys/pedidos.js'
 import { viewPedidoProduto } from './src/repository/entitys/pedido_produto.js'
 import { viewCreditoLimite } from './src/repository/entitys/creditos.js'
 import { viewEndereco } from './src/repository/entitys/endereco.js'
+import { postClientes } from './src/repository/entitys/post/post_clientes.js'
 
 const app = express()
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send('Hello World')
@@ -64,6 +66,15 @@ app.get('/pedidos_produtos', async (req, res) => {
     } catch (erro) {
         res.status(500).json({ erro: 'Erro ao listar clientes', detalhes: erro.message })
     }
+})
+
+app.post('/postCliente', async (req, res) => {
+    let {nome, sobreNome, cpf, telefone, id_limite, id_endereco} = req.body
+    let infos = [nome, sobreNome, cpf, telefone, id_limite, id_endereco]
+    let results = await postClientes(infos)
+
+    console.log(results)
+    res.json(results)
 })
 
 app.listen(3000, () => {

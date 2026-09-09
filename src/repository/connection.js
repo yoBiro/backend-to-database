@@ -21,15 +21,15 @@ async function closeConnection(pool) {
 }
 
 async function testConnection() {
-  try {
-    const pool = await connection();
-    const conn = await pool.getConnection();
-    await conn.ping();
-    console.log("✅ Conexão com o MySQL bem-sucedida!");
-    conn.release();
-  } catch (erro) {
-    console.error("❌ Falha ao conectar com o MySQL:", erro.message);
-  }
+    try {
+        const pool = await connection();
+        const conn = await pool.getConnection();
+        await conn.ping();
+        console.log("✅ Conexão com o MySQL bem-sucedida!");
+        conn.release();
+    } catch (erro) {
+        console.error("❌ Falha ao conectar com o MySQL:", erro.message);
+    }
 }
 
 export { connection, closeConnection, testConnection }
