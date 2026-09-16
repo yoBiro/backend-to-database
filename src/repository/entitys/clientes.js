@@ -3,7 +3,7 @@ import { connection } from "../connection.js"
 export async function viewClientes() {
     console.log("Executando a função viewClientes")
 
-        const sqlSelect = `SELECT * FROM vwClientes`
+        const sqlSelect = `SELECT * FROM Cliente`
 
     const conn = await connection()
     try {

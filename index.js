@@ -6,6 +6,7 @@ import { viewPedidoProduto } from './src/repository/entitys/pedido_produto.js'
 import { viewCreditoLimite } from './src/repository/entitys/creditos.js'
 import { viewEndereco } from './src/repository/entitys/endereco.js'
 import { postClientes } from './src/repository/entitys/post/post_clientes.js'
+import { postPedido } from './src/repository/entitys/post/post_pedidos.js'
 
 const app = express()
 app.use(express.json())
@@ -74,7 +75,25 @@ app.post('/postCliente', async (req, res) => {
     let results = await postClientes(infos)
 
     console.log(results)
-    res.json(results)
+    res.send(results)
+})
+
+app.post('/postPedido', async (req, res) => {
+    let {numero, data_elaboracao, id_cliente} = req.body
+    let infos = [numero, data_elaboracao, id_cliente]
+    let results = await postPedido(infos)
+
+    console.log(results)
+    res.send(results)
+})
+
+app.post('/postEndereco', async (req, res) => {
+    let {logradouro, numero, cep, cidade} = req.body
+    let infos = [logradouro, numero, cep, cidade]
+    let results = await postEndereco(infos)
+
+    console.log(results)
+    res.send(results)
 })
 
 app.listen(3000, () => {

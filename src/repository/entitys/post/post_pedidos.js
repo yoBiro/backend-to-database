@@ -1,11 +1,11 @@
 import { connection } from "../../connection.js"
 
-export async function postClientes(infos) {
-    console.log("Executando a função postClientes")
+export async function postPedido(infos) {
+    console.log("Executando a função postPedido")
 
     const sqlInsert = `
-        INSERT INTO Cliente 
-        (nome, sobreNome, cpf, telefone, id_limite, id_endereco) 
+        INSERT INTO Pedido
+        (numero, data_elaboracao, id_cliente) 
         VALUES ?
     `
 
