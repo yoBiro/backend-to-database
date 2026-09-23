@@ -96,6 +96,26 @@ app.post('/postEndereco', async (req, res) => {
     res.send(results)
 })
 
+app.post('/postCredito', async (req, res) => {
+    let {nome} = req.body
+    let infos = [nome]
+    let results = await postCredito(infos)
+
+    console.log(results)
+    res.send(results)
+})
+
+app.post('/postProduto', async (req, res) => {
+    let {nome, descricao, preco} = req.body
+    let infos = [nome, descricao, preco]
+    let results = await postProduto(infos)
+
+    console.log(results)
+    res.send(results)
+})
+
+
+
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000')
 })
