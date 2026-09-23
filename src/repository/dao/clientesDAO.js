@@ -1,4 +1,19 @@
-import { connection } from "../../connection.js"
+import { connection } from "../connection.js"
+
+export async function viewClientes() {
+    console.log("Executando a função viewClientes")
+
+        const sqlSelect = `SELECT * FROM Cliente`
+
+    const conn = await connection()
+    try {
+        const [rows, fields] = await conn.query(sqlSelect)
+        await conn.end()
+        return rows
+    } catch (err) {
+        return err.message
+    }
+}
 
 export async function postClientes(infos) {
     console.log("Executando a função postClientes")
@@ -21,3 +36,4 @@ export async function postClientes(infos) {
         return err.message
     }
 }
+

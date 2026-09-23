@@ -1,12 +1,10 @@
 import express from 'express'
-import { viewClientes } from './src/repository/entitys/clientes.js'
-import { viewProdutos } from './src/repository/entitys/produtos.js'
-import { viewPedidos } from './src/repository/entitys/pedidos.js'
-import { viewPedidoProduto } from './src/repository/entitys/pedido_produto.js'
-import { viewCreditoLimite } from './src/repository/entitys/creditos.js'
-import { viewEndereco } from './src/repository/entitys/endereco.js'
-import { postClientes } from './src/repository/entitys/post/post_clientes.js'
-import { postPedido } from './src/repository/entitys/post/post_pedidos.js'
+import { viewClientes,postClientes } from './src/repository/dao/clientesDAO.js'
+import { viewProdutos, postProduto } from './src/repository/dao/produtosDAO.js'
+import { viewPedidos, postPedido } from './src/repository/dao/pedidosDAO.js'
+import { viewPedidoProduto } from './src/repository/dao/pedido_produtoDAO.js'
+import { viewCreditoLimite, postCredito } from './src/repository/dao/creditosDAO.js'
+import { viewEndereco, postEndereco } from './src/repository/dao/enderecoDAO.js'
 
 const app = express()
 app.use(express.json())
