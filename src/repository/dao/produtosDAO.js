@@ -35,3 +35,23 @@ export async function postProduto(infos) {
       return err.message
   }
 }
+
+export async function updateProduto(infos) {
+    console.log("Executando a função updateProduto")
+    const sqlUpdate = `
+        UPDATE Produto 
+        SET nome = ?, descricao = ?, preco = ? 
+        WHERE id_produto = ?
+    `
+
+    const conn = await connection()
+
+    try {
+        const [results] = await conn.query(sqlUpdate, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}

@@ -35,3 +35,23 @@ export async function postPedido(infos) {
       return err.message
   }
 }
+
+export async function updatePedido(infos) {
+    console.log("Executando a função updatePedido")
+    const sqlUpdate = `
+        UPDATE Pedido 
+        SET numero = ?, data_elaboracao = ?, id_cliente = ? 
+        WHERE id_pedido = ?
+    `
+
+    const conn = await connection()
+
+    try {
+        const [results] = await conn.query(sqlUpdate, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}

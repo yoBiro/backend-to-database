@@ -35,3 +35,23 @@ export async function postCredito(infos) {
       return err.message
   }
 }
+
+export async function updateCredito(infos) {
+    console.log("Executando a função updateCredito")
+    const sqlUpdate = `
+        UPDATE LimiteDeCredito 
+        SET nome = ? 
+        WHERE id_limite = ?
+    `
+
+    const conn = await connection()
+
+    try {
+        const [results] = await conn.query(sqlUpdate, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}

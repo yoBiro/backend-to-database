@@ -37,3 +37,22 @@ export async function postClientes(infos) {
     }
 }
 
+export async function updateCliente(infos) {
+    console.log("Executando a função updateCliente")
+    const sqlUpdate = `
+        UPDATE Cliente 
+        SET nome = ?, sobreNome = ?, cpf = ?, telefone = ?, id_limite = ?, id_endereco = ? 
+        WHERE codigo = ?
+    `
+
+    const conn = await connection()
+
+    try {
+        const [results] = await conn.query(sqlUpdate, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}

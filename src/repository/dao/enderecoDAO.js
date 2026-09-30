@@ -18,8 +18,8 @@ export async function postEndereco(infos) {
   console.log("Executando a função postEndereco")
 
   const sqlInsert = `
-      INSERT INTO Cliente 
-      (logradouro, numero, cep, cidade) 
+      INSERT INTO Endereco 
+      (id_endereco, logradouro, numero, cep, cidade) 
       VALUES ?
   `
 
@@ -34,4 +34,24 @@ export async function postEndereco(infos) {
       await conn.end()
       return err.message
   }
+}
+
+export async function updateEndereco(infos) {
+    console.log("Executando a função updateEndereco")
+    const sqlUpdate = `
+        UPDATE Endereco 
+        SET logradouro = ?, numero = ?, cep = ?, cidade = ? 
+        WHERE id_endereco = ?
+    `
+
+    const conn = await connection()
+
+    try {
+        const [results] = await conn.query(sqlUpdate, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
 }
