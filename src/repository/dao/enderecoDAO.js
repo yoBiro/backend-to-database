@@ -55,3 +55,22 @@ export async function updateEndereco(infos) {
         return err.message
     }
 }
+
+export async function deleteEndereco(infos) {
+    console.log("Executando a função deleteEndereco")
+    const sqlDelete = `
+        DELETE FROM Endereco 
+        WHERE id_endereco = ?
+    `
+
+    const conn = await connection()
+
+    try {
+        const [results] = await conn.query(sqlDelete, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}

@@ -55,3 +55,22 @@ export async function updateCredito(infos) {
         return err.message
     }
 }
+
+export async function deleteCredito(infos) {
+    console.log("Executando a função deleteCredito")
+    const sqlDelete = `
+        DELETE FROM LimiteDeCredito 
+        WHERE id_limite = ?
+    `
+
+    const conn = await connection()
+    
+    try {
+        const [results] = await conn.query(sqlDelete, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}

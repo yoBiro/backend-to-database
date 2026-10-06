@@ -1,5 +1,5 @@
 import express from 'express'
-import { viewCreditoLimite, postCredito, updateCredito } from '../repository/dao/creditosDAO.js'
+import { viewCreditoLimite, postCredito, updateCredito, deleteCredito } from '../repository/dao/creditosDAO.js'
 
 export const creditosRoutes = express.Router()
 
@@ -30,5 +30,15 @@ creditosRoutes.put('/putCreditos/:id', async (req, res) => {
 		res.send(resultado)
 	} catch (erro) {
 		res.status(500).json({ erro: 'Erro ao atualizar crédito', detalhes: erro.message })
+	}
+})
+
+creditosRoutes.delete('/deleteCredito/:id', async (req, res) => {
+	try {
+		const { id } = req.params
+		const resultado = await deleteCredito([id])
+		res.send(resultado)
+	} catch (erro) {
+		res.status(500).json({ erro: 'Erro ao excluir crédito', detalhes: erro.message })
 	}
 })

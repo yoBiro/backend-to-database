@@ -56,3 +56,21 @@ export async function updateCliente(infos) {
         return err.message
     }
 }
+
+export async function deleteCliente(infos) {
+    console.log("Executando a função deleteCliente")
+    const sqlDelete = `
+        DELETE FROM Cliente 
+        WHERE codigo = ?
+    `
+    
+    const conn = await connection() 
+    try {
+        const [results] = await conn.query(sqlDelete, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}

@@ -1,5 +1,5 @@
 import express from 'express'
-import { viewEndereco, postEndereco, updateEndereco } from '../repository/dao/enderecoDAO.js'
+import { viewEndereco, postEndereco, updateEndereco, deleteEndereco } from '../repository/dao/enderecoDAO.js'
 
 export const enderecoRoutes = express.Router()
 
@@ -31,4 +31,14 @@ enderecoRoutes.put('/putEnderecos/:id', async (req, res) => {
     } catch (erro) {
         res.status(500).json({ erro: 'Erro ao atualizar endereço', detalhes: erro.message })
     }
+})
+
+enderecoRoutes.delete('/deleteEndereco/:id', async (req, res) => {
+		try {
+				const { id } = req.params
+				const resultado = await deleteEndereco([id])
+				res.send(resultado)
+		} catch (erro) {
+				res.status(500).json({ erro: 'Erro ao excluir endereço', detalhes: erro.message })
+		}
 })

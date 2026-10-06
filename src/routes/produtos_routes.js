@@ -32,3 +32,13 @@ produtosRoutes.put('/putProdutos/:id', async (req, res) => {
         res.status(500).json({ erro: 'Erro ao atualizar produto', detalhes: erro.message })
     }
 })
+
+produtosRoutes.delete('/deleteProduto/:id', async (req, res) => {
+		try {
+				const { id } = req.params
+				const resultado = await deleteProduto([id])
+				res.send(resultado)
+		} catch (erro) {
+				res.status(500).json({ erro: 'Erro ao excluir produto', detalhes: erro.message })
+		}
+})

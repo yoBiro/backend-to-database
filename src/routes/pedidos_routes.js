@@ -1,5 +1,5 @@
 import express from 'express'
-import { viewPedidos, postPedido, updatePedido } from '../repository/dao/pedidosDAO.js'
+import { viewPedidos, postPedido, updatePedido, deletePedido } from '../repository/dao/pedidosDAO.js'
 
 export const pedidosRoutes = express.Router()
 
@@ -31,4 +31,14 @@ pedidosRoutes.put('/putPedidos/:id', async (req, res) => {
     } catch (erro) {
         res.status(500).json({ erro: 'Erro ao atualizar pedido', detalhes: erro.message })
     }
+})
+
+pedidosRoutes.delete('/deletePedido/:id', async (req, res) => {
+		try {
+				const { id } = req.params	
+				const resultado = await deletePedido([id])
+				res.send(resultado)
+		} catch (erro) {
+				res.status(500).json({ erro: 'Erro ao excluir pedido', detalhes: erro.message })
+		}
 })

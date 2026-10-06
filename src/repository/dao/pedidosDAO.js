@@ -55,3 +55,22 @@ export async function updatePedido(infos) {
         return err.message
     }
 }
+
+export async function deletePedido(infos) {
+    console.log("Executando a função deletePedido")
+    const sqlDelete = `
+        DELETE FROM Pedido 
+        WHERE id_pedido = ?
+    `
+
+    const conn = await connection()
+
+    try {
+        const [results] = await conn.query(sqlDelete, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}

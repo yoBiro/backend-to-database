@@ -55,3 +55,22 @@ export async function updateProduto(infos) {
         return err.message
     }
 }
+
+export async function deleteProduto(infos) {
+    console.log("Executando a função deleteProduto")
+    const sqlDelete = `
+        DELETE FROM Produto 
+        WHERE id_produto = ?
+    `
+
+    const conn = await connection()
+
+    try {
+        const [results] = await conn.query(sqlDelete, infos)
+        await conn.end()
+        return results
+    } catch (err) {
+        await conn.end()
+        return err.message
+    }
+}
